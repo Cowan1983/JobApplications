@@ -12,14 +12,41 @@ namespace JobApplication
 {
     public partial class frmFrontPage : Form
     {
+
+        //This value stores the current search type.
+        //This means each time we do a search, we do not
+        //need to find out which search type we are doing.
+        //The radio button click events will have the responsibility
+        //for changing this value
+        private string searchType; //This could/should be an enumerated type.
+
         public frmFrontPage()
         {
             InitializeComponent();
+
+            InitialiseStatusList();
+
+            //Find a better way of doing this....
+            rBtnJobTitle.Checked = true;
+            rBtnJobTitle_Click(null, null);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void InitialiseStatusList()
+        {
+            var items = chkListBoxStatus.Items;
+            items.Add("Unset");
+            items.Add("CV Sent");
+            items.Add("Application Form Requested");
+            items.Add("Application Form Sent");
+            items.Add("Application Acknowledged");
+            items.Add("Pending");
+            items.Add("Interview Arranged");
+            items.Add("Closed");
         }
 
         private void btnDoSomething_Click(object sender, EventArgs e)
@@ -340,6 +367,7 @@ namespace JobApplication
         {
             JobLeadRepo thisJobLeadRepo = new JobLeadRepo();
             dataGridView.DataSource = thisJobLeadRepo.GetJobLeadGridDatasource();
+            dataGridView.Columns["JobLeadID"].Visible = false;
         }
 
         private void btnNewBroker_Click(object sender, EventArgs e)
@@ -347,6 +375,122 @@ namespace JobApplication
             //We will default to showing an Agency broker for new brokers.
             frmBroker newBrokerForm = new frmBroker(true);
             newBrokerForm.ShowDialog();
+        }
+
+        private void btnSearchJobLeads_Click(object sender, EventArgs e)
+        {
+            //We (currently) have four different search facilities.
+            //Job Title
+            //Date Range
+            //Status
+            //Reference value
+
+            JobLeadRepo thisJobLeadRepo = new JobLeadRepo();
+
+
+            switch (searchType)
+            {
+                case "JobType":
+                    dataGridView.DataSource = thisJobLeadRepo.GetJobTitleFilteredJobLeadGridDataSource(txtBoxSearchText.Text);
+                    break;
+
+                case "DateType":
+                    dataGridView.DataSource = thisJobLeadRepo.GetJobDateFilteredJobLeadGridDataSource(dateTimePickerStartDate.Value, dateTimePickerEndDate.Value);
+                    break;
+
+                case "StatusType":
+                    List<string> chosenStatusList = chkListBoxStatus.CheckedItems.OfType<string>().ToList();
+                    dataGridView.DataSource = thisJobLeadRepo.GetJobStatusFilteredJobLeadGridDataSource(chosenStatusList);
+                    break;
+
+                case "ReferenceType":
+                    dataGridView.DataSource = thisJobLeadRepo.GetJobRefFilteredJobLeadGridDatsSource(txtBoxSearchText.Text);
+                    break;
+
+                case "BrokerType":
+                    dataGridView.DataSource = thisJobLeadRepo.GetJobBrokerFilteredJobLeadGridDataSource(txtBoxSearchText.Text);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// The function that shows/hides the search control panels
+        /// </summary>
+        private void SetSearchControls()
+        {
+            switch (searchType)
+            {
+                case "JobType":
+                    pnlDateSearchOptions.Visible = false;
+                    pnlJobTitleSearchOptions.Visible = true;
+                    pnlStatusSearchOptions.Visible = false;
+                    break;
+
+                case "DateType":
+                    pnlDateSearchOptions.Visible = true;
+                    pnlJobTitleSearchOptions.Visible = false;
+                    pnlStatusSearchOptions.Visible = false;
+                    break;
+
+                case "StatusType":
+                    pnlDateSearchOptions.Visible = false;
+                    pnlJobTitleSearchOptions.Visible = false;
+                    pnlStatusSearchOptions.Visible = true;
+                    break;
+
+                case "ReferenceType":
+                    pnlDateSearchOptions.Visible = false;
+                    pnlJobTitleSearchOptions.Visible = true;
+                    pnlStatusSearchOptions.Visible = false;
+                    break;
+
+                case "BrokerType":
+                    pnlDateSearchOptions.Visible = false;
+                    pnlJobTitleSearchOptions.Visible = true;
+                    pnlStatusSearchOptions.Visible = false;
+                    break;
+
+                default:
+                    pnlDateSearchOptions.Visible = false;
+                    pnlJobTitleSearchOptions.Visible = false;
+                    pnlStatusSearchOptions.Visible = false;
+                    break;
+            }
+        }
+
+        //Not on _CheckChanged as we do not want each button firing when one of
+        //the radio button group is selected
+        private void rBtnJobTitle_Click(object sender, EventArgs e)
+        {
+            searchType = "JobType";
+            SetSearchControls();
+        }
+
+        private void rBtnJobDate_Click(object sender, EventArgs e)
+        {
+            searchType = "DateType";
+            SetSearchControls();
+        }
+
+        private void rBtnJobStatus_Click(object sender, EventArgs e)
+        {
+            searchType = "StatusType";
+            SetSearchControls();
+        }
+
+        private void rBtnJobReference_Click(object sender, EventArgs e)
+        {
+            searchType = "ReferenceType";
+            SetSearchControls();
+        }
+
+        private void rBtnJobAgent_Click(object sender, EventArgs e)
+        {
+            searchType = "BrokerType";
+            SetSearchControls();
         }
     }
 }

@@ -47,6 +47,20 @@ namespace JobApplication
         public string MobileTelNo { get; set; }
         public string LandLineTelNo { get; set; }
 
+        private List<Note> myContactNotes = new List<Note>();
+
+        public List<Note> ContactNotes
+        {
+            get
+            {
+                return myContactNotes;
+            }
+            set
+            {
+                myContactNotes = value;
+            }
+        }
+
         //Default constructor
         public Contact() { }
 

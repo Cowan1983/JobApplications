@@ -39,6 +39,20 @@ namespace JobApplication
             }
         }
 
+        private List<Note> myBrokerNotes = new List<Note>();
+
+        public List<Note> BrokerNotes
+        {
+            get
+            {
+                return myBrokerNotes;
+            }
+            set
+            {
+                myBrokerNotes = value;
+            }
+        }
+
         public int BrokerID { get; set; }
 
         //A simple boolean to say if this broker is an agency (otherwise it is an employer)

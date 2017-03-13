@@ -40,6 +40,7 @@ namespace JobApplication
         string Email { get; set; }
         string MobileTelNo { get; set; }
         string LandLineTelNo { get; set; }
+        List<Note> ContactNotes { get; set; }
         iContact Save();
     }
 
@@ -54,6 +55,7 @@ namespace JobApplication
         string Website { get; set; }
         bool IsAgency { get; set; }
         List<Broker> GetAllUnassociatedBrokers();
+        List<Note> BrokerNotes { get; set; }
         Broker Save();
     }
 
@@ -78,10 +80,19 @@ namespace JobApplication
         string Ref_Two { get; set; }
         string Ref_Three { get; set; }
         List<string> StatusList { get; }
+        List<Note> JobLeadNotes { get; set; }
 
         void Save();
         object GetAllBrokers(bool isAgency);
         Broker GetBroker(int thisBrokerID);
         Contact GetContact(int thisContactID);
+    }
+
+    public interface iNote
+    {
+        string NoteText { get; set; }
+        DateTime NoteDate { get; set; }
+
+        iNote Save();
     }
 }

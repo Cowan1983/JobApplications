@@ -105,6 +105,12 @@
     <Compile Include="frmName.Designer.cs">
       <DependentUpon>frmName.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNote.designer.cs">
+      <DependentUpon>frmNote.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrontPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,7 @@
     <Compile Include="JobLeadRepo.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Name.cs" />
+    <Compile Include="Note.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAddress.resx">
@@ -134,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmName.resx">
       <DependentUpon>frmName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNote.resx">
+      <DependentUpon>frmNote.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrontPage.resx">
       <DependentUpon>FrontPage.cs</DependentUpon>

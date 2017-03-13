@@ -27,6 +27,7 @@ namespace JobApplication
                     .Include("EmployerBroker.Address")
                     .Include("EmployerBroker.Contacts.Address")
                     .Include("EmployerBroker.Contacts.Name")
+                    .Include("JobLeadNotes")
                     .Where(s => s.JobLeadID == myJobLeadID)
                     .FirstOrDefault<iJobLead>();
 
@@ -39,12 +40,76 @@ namespace JobApplication
         {
             using (var ctx = new JobLeadContext())
             {
-                var allLeadsTable = from m in ctx.JobLeads
-                select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+                var allLeadsTable = from m in ctx.JobLeads orderby m.JobLeadID descending
+                select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name, Contact = m.AgencyContact.Name.FirstName + " "  + m.AgencyContact.Name.Surname };
 
                 return allLeadsTable.ToList();
             }
         }
+
+        #region Job Lead Grid Search Function
+
+        public object GetJobRefFilteredJobLeadGridDatsSource(string jobRefToSearchFor)
+        {
+            using (var ctx = new JobLeadContext())
+            {
+                var allLeadsTable = from m in ctx.JobLeads
+                                    where m.Ref_One.Contains(jobRefToSearchFor) || m.Ref_Two.Contains(jobRefToSearchFor) || m.Ref_Three.Contains(jobRefToSearchFor)
+                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+
+                return allLeadsTable.ToList();
+            }
+        }
+
+        public object GetJobTitleFilteredJobLeadGridDataSource(string jobTitleToSearchFor)
+        {
+            using (var ctx = new JobLeadContext())
+            {
+                var allLeadsTable = from m in ctx.JobLeads
+                                    where m.JobTitle.Contains(jobTitleToSearchFor)
+                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+
+                return allLeadsTable.ToList();
+            }
+        }
+
+        public object GetJobDateFilteredJobLeadGridDataSource(DateTime startDate, DateTime endDate)
+        {
+            using (var ctx = new JobLeadContext())
+            {
+                var allLeadsTable = from m in ctx.JobLeads
+                                    where m.Date > startDate && m.Date < endDate
+                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+
+                return allLeadsTable.ToList();
+            }
+        }
+
+        public object GetJobStatusFilteredJobLeadGridDataSource(List<string> jobStatusToSearchFor)
+        {
+            using (var ctx = new JobLeadContext())
+            {
+                var allLeadsTable = from m in ctx.JobLeads
+                                    where jobStatusToSearchFor.Contains(m.Status)
+                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+
+                return allLeadsTable.ToList();
+            }
+        }
+
+        public object GetJobBrokerFilteredJobLeadGridDataSource(string brokerToSearchFor)
+        {
+            using (var ctx = new JobLeadContext())
+            {
+                var allLeadsTable = from m in ctx.JobLeads
+                                    where m.AgencyBroker.Name.Contains(brokerToSearchFor) || m.EmployerBroker.Name.Contains(brokerToSearchFor)
+                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+
+                return allLeadsTable.ToList();
+            }
+        }
+
+        #endregion
 
         public object GetAllEmployerBrokers()
         {
@@ -77,6 +142,7 @@ namespace JobApplication
                     .Include("Contacts.Address")
                     .Include("Contacts.Name")
                     .Include("Brokers")
+                    .Include("BrokerNotes")
                     .Where(m => m.BrokerID == thisBrokerID)
                     .FirstOrDefault<Broker>();
 
@@ -91,6 +157,7 @@ namespace JobApplication
                 Contact thisContact = ctx.Contacts
                     .Include("Address")
                     .Include("Name")
+                    .Include("ContactNotes")
                     .Where(m => m.ContactID == thisContactID)
                     .FirstOrDefault<Contact>();
 
@@ -177,6 +244,19 @@ namespace JobApplication
                         var newContactEntity = ctx.Contacts.Where(s => s.ContactID == myJobLead.EmployerContactID).FirstOrDefault<Contact>();
                         contextJobLeadEntity.EmployerContact = newContactEntity;
                     }
+
+                    //Now to iterate through the JobLeadNotes and add in any new ones
+                    foreach (Note thisNote in myJobLead.JobLeadNotes)
+                    {
+                        //Get the context version of the current note
+                        var newNoteEntity = ctx.Notes.Where(s => s.NoteID == thisNote.NoteID).FirstOrDefault<Note>();
+
+                        //See if it is already attached to the context version of this job lead
+                        if (!contextJobLeadEntity.JobLeadNotes.Contains(newNoteEntity))
+                        {
+                            contextJobLeadEntity.JobLeadNotes.Add(newNoteEntity);
+                        }
+                    }
                 }
 
                 //Finally, we save the changes to the changes made in the context.
@@ -260,7 +340,12 @@ namespace JobApplication
                     //The contacts
                     foreach (Contact thisContact in myBroker.Contacts)
                     {
+                        var newContactEntity = ctx.Contacts.Where(s => s.ContactID == thisContact.ContactID).FirstOrDefault<Contact>();
 
+                        if (!contextBrokerEntity.Contacts.Contains(newContactEntity))
+                        {
+                            contextBrokerEntity.Contacts.Add(newContactEntity);
+                        }
                     }
 
                     //The brokers
@@ -284,6 +369,19 @@ namespace JobApplication
                             newBrokerEntity.Brokers.Add(contextBrokerEntity);
                         }
 
+                    }
+
+                    //Now to iterate through the JobLeadNotes and add in any new ones
+                    foreach (Note thisNote in myBroker.BrokerNotes)
+                    {
+                        //Get the context version of the current note
+                        var newNoteEntity = ctx.Notes.Where(s => s.NoteID == thisNote.NoteID).FirstOrDefault<Note>();
+
+                        //See if it is already attached to the context version of this broker
+                        if (!contextBrokerEntity.BrokerNotes.Contains(newNoteEntity))
+                        {
+                            contextBrokerEntity.BrokerNotes.Add(newNoteEntity);
+                        }
                     }
 
                     ctx.SaveChanges();
@@ -416,6 +514,19 @@ namespace JobApplication
                         contextContactEntity.Address = newAddressEntity;
                     }
 
+                    //Now to iterate through the ContactNotes and add in any new ones
+                    foreach (Note thisNote in myContact.ContactNotes)
+                    {
+                        //Get the context version of the current note
+                        var newNoteEntity = ctx.Notes.Where(s => s.NoteID == thisNote.NoteID).FirstOrDefault<Note>();
+
+                        //See if it is already attached to the context version of this contact
+                        if (!contextContactEntity.ContactNotes.Contains(newNoteEntity))
+                        {
+                            contextContactEntity.ContactNotes.Add(newNoteEntity);
+                        }
+                    }
+
                     ctx.SaveChanges();
 
                     return contextContactEntity;
@@ -425,5 +536,36 @@ namespace JobApplication
 
         }
 
+        public iNote SaveNote(Note myNote)
+        {
+            //We will do this within a single Context
+            using (var ctx = new JobLeadContext())
+            {
+                //Currently we have no sub-entities that we need to find and attach
+
+                if (myNote.NoteID == 0)
+                {
+                    //New address
+                    ctx.Notes.Add(myNote);
+
+                    ctx.SaveChanges();
+
+                    //Having saved the address, we pass it back so we can add it to whatever class requested it to be made.
+                    return myNote;
+                }
+                else
+                {
+                    //Update existing address
+                    var contextNoteEntity = ctx.Notes.Where(s => s.NoteID == myNote.NoteID).FirstOrDefault<Note>();
+
+                    contextNoteEntity.NoteDate = myNote.NoteDate;
+                    contextNoteEntity.NoteText = myNote.NoteText;
+
+                    ctx.SaveChanges();
+
+                    return contextNoteEntity;
+                }
+            }
+        }
     }
 }

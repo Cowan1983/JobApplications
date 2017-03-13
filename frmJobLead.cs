@@ -28,6 +28,7 @@ namespace JobApplication
             InitialiseBrokerDropdown(cboAgencyNames, true);
             InitialiseBrokerDropdown(cboEmployerNames, false);
 
+            SetNotesCount();
         }
 
         private void btnCloseJobLead_Click(object sender, EventArgs e)
@@ -172,6 +173,7 @@ namespace JobApplication
             txtBoxRefOne.Text = myJobLead.Ref_One;
             txtBoxRefTwo.Text = myJobLead.Ref_Two;
             txtBoxRefThree.Text = myJobLead.Ref_Three;
+            SetNotesCount();
 
         }
 
@@ -409,6 +411,30 @@ namespace JobApplication
 
             //Replace the existing AgencyBroker
             myJobLead.EmployerContact = newContact;
+        }
+
+        private void btnAddNote_Click(object sender, EventArgs e)
+        {
+            //Create a new nore form
+            frmNote newNoteForm = new frmNote(myJobLead.JobLeadNotes);
+
+            //Show the note form in a dialog
+            newNoteForm.ShowDialog();
+
+            //Get back the new note
+            Note newJobNote = (Note)newNoteForm.myNote;
+
+            //If they saved the note, add it to the List<Note> for this job lead.
+            if (newJobNote.NoteID != 0)
+            {
+                myJobLead.JobLeadNotes.Add(newJobNote);
+            }
+        }
+
+        private void SetNotesCount()
+        {
+            int notesCount = myJobLead.JobLeadNotes.Count;
+            lblNotesCount.Text = "Job Notes - " + notesCount;
         }
     }
 }

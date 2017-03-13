@@ -46,6 +46,7 @@
             this.txtBoxContactMobileNo = new System.Windows.Forms.TextBox();
             this.lblContactLandLineNo = new System.Windows.Forms.Label();
             this.lblContactMobileNo = new System.Windows.Forms.Label();
+            this.btnAddNote = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCancelCloseAddress
@@ -207,11 +208,22 @@
             this.lblContactMobileNo.TabIndex = 19;
             this.lblContactMobileNo.Text = "Mobile No.:";
             // 
+            // btnAddNote
+            // 
+            this.btnAddNote.Location = new System.Drawing.Point(270, 279);
+            this.btnAddNote.Name = "btnAddNote";
+            this.btnAddNote.Size = new System.Drawing.Size(122, 23);
+            this.btnAddNote.TabIndex = 46;
+            this.btnAddNote.Text = "Add and View Notes";
+            this.btnAddNote.UseVisualStyleBackColor = true;
+            this.btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
+            // 
             // frmContact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 354);
+            this.Controls.Add(this.btnAddNote);
             this.Controls.Add(this.lblContactMobileNo);
             this.Controls.Add(this.lblContactLandLineNo);
             this.Controls.Add(this.txtBoxContactMobileNo);
@@ -257,5 +269,6 @@
         private System.Windows.Forms.TextBox txtBoxContactMobileNo;
         private System.Windows.Forms.Label lblContactLandLineNo;
         private System.Windows.Forms.Label lblContactMobileNo;
+        private System.Windows.Forms.Button btnAddNote;
     }
 }

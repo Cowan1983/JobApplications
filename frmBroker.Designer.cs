@@ -53,6 +53,7 @@
             this.pnlUnassociatedBrokers = new System.Windows.Forms.Panel();
             this.btnAssociateBroker = new System.Windows.Forms.Button();
             this.lstBoxUnassociatedBrokers = new System.Windows.Forms.ListBox();
+            this.btnAddNote = new System.Windows.Forms.Button();
             this.pnlBrokerType.SuspendLayout();
             this.pnlUnassociatedBrokers.SuspendLayout();
             this.SuspendLayout();
@@ -287,11 +288,22 @@
             this.lstBoxUnassociatedBrokers.Size = new System.Drawing.Size(194, 108);
             this.lstBoxUnassociatedBrokers.TabIndex = 20;
             // 
+            // btnAddNote
+            // 
+            this.btnAddNote.Location = new System.Drawing.Point(7, 444);
+            this.btnAddNote.Name = "btnAddNote";
+            this.btnAddNote.Size = new System.Drawing.Size(122, 23);
+            this.btnAddNote.TabIndex = 47;
+            this.btnAddNote.Text = "Add and View Notes";
+            this.btnAddNote.UseVisualStyleBackColor = true;
+            this.btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
+            // 
             // frmBroker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 557);
+            this.Controls.Add(this.btnAddNote);
             this.Controls.Add(this.pnlUnassociatedBrokers);
             this.Controls.Add(this.pnlBrokerType);
             this.Controls.Add(this.lblWebSite);
@@ -350,5 +362,6 @@
         private System.Windows.Forms.Panel pnlUnassociatedBrokers;
         private System.Windows.Forms.Button btnAssociateBroker;
         private System.Windows.Forms.ListBox lstBoxUnassociatedBrokers;
+        private System.Windows.Forms.Button btnAddNote;
     }
 }

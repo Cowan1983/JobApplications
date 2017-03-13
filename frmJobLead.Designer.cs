@@ -62,6 +62,8 @@
             this.btnNewAgencyBroker = new System.Windows.Forms.Button();
             this.btnNewEmployerBroker = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnAddNote = new System.Windows.Forms.Button();
+            this.lblNotesCount = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblCurrentJobStatus
@@ -368,11 +370,32 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnAddNote
+            // 
+            this.btnAddNote.Location = new System.Drawing.Point(122, 358);
+            this.btnAddNote.Name = "btnAddNote";
+            this.btnAddNote.Size = new System.Drawing.Size(122, 23);
+            this.btnAddNote.TabIndex = 45;
+            this.btnAddNote.Text = "Add and View Notes";
+            this.btnAddNote.UseVisualStyleBackColor = true;
+            this.btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
+            // 
+            // lblNotesCount
+            // 
+            this.lblNotesCount.AutoSize = true;
+            this.lblNotesCount.Location = new System.Drawing.Point(250, 363);
+            this.lblNotesCount.Name = "lblNotesCount";
+            this.lblNotesCount.Size = new System.Drawing.Size(104, 13);
+            this.lblNotesCount.TabIndex = 46;
+            this.lblNotesCount.Text = "<Notes Count Here>";
+            // 
             // frmJobLead
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(783, 440);
+            this.Controls.Add(this.lblNotesCount);
+            this.Controls.Add(this.btnAddNote);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnNewEmployerBroker);
             this.Controls.Add(this.btnNewAgencyBroker);
@@ -450,5 +473,7 @@
         private System.Windows.Forms.Button btnNewAgencyBroker;
         private System.Windows.Forms.Button btnNewEmployerBroker;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnAddNote;
+        private System.Windows.Forms.Label lblNotesCount;
     }
 }

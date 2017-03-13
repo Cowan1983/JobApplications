@@ -57,7 +57,20 @@ namespace JobApplication
                 return staticStatusList;
             }
         }
-        
+
+        private List<Note> myJobLeadNotes = new List<Note>();
+
+        public List<Note> JobLeadNotes
+        {
+            get
+            {
+                return myJobLeadNotes;
+            }
+            set
+            {
+                myJobLeadNotes = value;
+            }
+        }
 
         public JobLead()
         {

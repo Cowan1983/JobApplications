@@ -117,5 +117,23 @@ namespace JobApplication
 
             rTextBoxContactAddress.Text = myContact.Address.FullAddress;
         }
+
+        private void btnAddNote_Click(object sender, EventArgs e)
+        {
+            //Create a new nore form
+            frmNote newNoteForm = new frmNote(myContact.ContactNotes);
+
+            //Show the note form in a dialog
+            newNoteForm.ShowDialog();
+
+            //Get back the new note
+            Note newContactNote = (Note)newNoteForm.myNote;
+
+            //If they saved the note, add it to the List<Note> for this job lead.
+            if (newContactNote.NoteID != 0)
+            {
+                myContact.ContactNotes.Add(newContactNote);
+            }
+        }
     }
 }

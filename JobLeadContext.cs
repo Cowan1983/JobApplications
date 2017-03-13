@@ -24,7 +24,7 @@ namespace JobApplication
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Name> Names { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        
+        public DbSet<Note> Notes { get; set; }
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.

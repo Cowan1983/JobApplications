@@ -228,5 +228,23 @@ namespace JobApplication
         {
 
         }
+
+        private void btnAddNote_Click(object sender, EventArgs e)
+        {
+            //Create a new nore form
+            frmNote newNoteForm = new frmNote(myBroker.BrokerNotes);
+
+            //Show the note form in a dialog
+            newNoteForm.ShowDialog();
+
+            //Get back the new note
+            Note newBrokerNote = (Note)newNoteForm.myNote;
+
+            //If they saved the note, add it to the List<Note> for this job lead.
+            if (newBrokerNote.NoteID != 0)
+            {
+                myBroker.BrokerNotes.Add(newBrokerNote);
+            }
+        }
     }
 }

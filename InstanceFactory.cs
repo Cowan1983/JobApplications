@@ -60,5 +60,15 @@ namespace JobApplication
         {
             return new JobLead();
         }
+
+        public static iNote Note()
+        {
+            return new Note();
+        }
+
+        public static iNote Note(string myNoteText)
+        {
+            return new Note(myNoteText);
+        }
     }
 }
