@@ -41,9 +41,22 @@ namespace JobApplication
             using (var ctx = new JobLeadContext())
             {
                 var allLeadsTable = from m in ctx.JobLeads orderby m.JobLeadID descending
-                select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name, Contact = m.AgencyContact.Name.FirstName + " "  + m.AgencyContact.Name.Surname };
+                select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Employer = m.EmployerBroker.Name, Agency = m.AgencyBroker.Name, Contact = m.AgencyContact.Name.FirstName + " "  + m.AgencyContact.Name.Surname };
 
                 return allLeadsTable.ToList();
+            }
+        }
+
+        public object GetAgencyBrokersDatasource()
+        {
+            using (var ctx = new JobLeadContext())
+            {
+                var allAgencyTable = from m in ctx.Brokers
+                                     where m.IsAgency == true
+                                     orderby m.Name ascending
+                                     select new { m.BrokerID, m.Name, Address = m.Address.BodyText + ", " + m.Address.City + ", " + m.Address.Postcode, Phone = m.LandLineTelNo };
+
+                return allAgencyTable.ToList();
             }
         }
 
@@ -200,7 +213,29 @@ namespace JobApplication
                         var newContactEntity = ctx.Contacts.Where(s => s.ContactID == myJobLead.EmployerContactID).FirstOrDefault<Contact>();
                         myJobLead.EmployerContact = newContactEntity;
                     }
-                    
+
+                    //I AM NOT SURE THIS WORKS PROPERLY YET
+
+                    //Now to iterate through the JobLeadNotes and add in any new ones
+                    List<Note> contextNotesList = new List<Note>();
+                    foreach (Note thisNote in myJobLead.JobLeadNotes)
+                    {
+                        //Get the context version of the current note
+                        if (thisNote.NoteID != 0)
+                        {
+                            var newNoteEntity = ctx.Notes.Where(s => s.NoteID == thisNote.NoteID).FirstOrDefault<Note>();
+                            contextNotesList.Add(newNoteEntity);
+                        }
+
+                    }
+
+                    if(myJobLead.JobLeadNotes.Count() != 0)
+                    {
+                        myJobLead.JobLeadNotes = contextNotesList;
+                    }
+
+                    //END OF CODE I AM UNSURE ABOUT
+
                     //Add it to the context.
                     ctx.JobLeads.Add((JobLead)myJobLead); //As this requires the form to know what the actual class is, we definitely need to move this out of the form.
                 }
@@ -545,17 +580,17 @@ namespace JobApplication
 
                 if (myNote.NoteID == 0)
                 {
-                    //New address
+                    //New note
                     ctx.Notes.Add(myNote);
 
                     ctx.SaveChanges();
 
-                    //Having saved the address, we pass it back so we can add it to whatever class requested it to be made.
+                    //Having saved the note, we pass it back so we can add it to whatever class requested it to be made.
                     return myNote;
                 }
                 else
                 {
-                    //Update existing address
+                    //Update existing note (will this ever happen?)
                     var contextNoteEntity = ctx.Notes.Where(s => s.NoteID == myNote.NoteID).FirstOrDefault<Note>();
 
                     contextNoteEntity.NoteDate = myNote.NoteDate;

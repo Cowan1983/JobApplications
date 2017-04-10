@@ -26,6 +26,7 @@ namespace JobApplication
 
             //Default to Agency for new brokers
             rButtonAgencyBroker.Checked = isAgency;
+            rButtonEmployerBroker.Checked = !isAgency;
         }
 
         public frmBroker (iBroker myBrokerInstance)

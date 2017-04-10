@@ -332,7 +332,10 @@ namespace JobApplication
         {
 
             ReloadJobLeadGrid();
-            
+
+            ReloadAgencyBrokerGrid();
+
+
         }
 
         private void dataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -368,6 +371,14 @@ namespace JobApplication
             JobLeadRepo thisJobLeadRepo = new JobLeadRepo();
             dataGridView.DataSource = thisJobLeadRepo.GetJobLeadGridDatasource();
             dataGridView.Columns["JobLeadID"].Visible = false;
+        }
+
+        private void ReloadAgencyBrokerGrid()
+        {
+            JobLeadRepo thisJobLeadRepo = new JobLeadRepo();
+            dataGridAgencies.DataSource = thisJobLeadRepo.GetAgencyBrokersDatasource();
+            dataGridAgencies.Columns["BrokerID"].Visible = false;
+            
         }
 
         private void btnNewBroker_Click(object sender, EventArgs e)
@@ -491,6 +502,23 @@ namespace JobApplication
         {
             searchType = "BrokerType";
             SetSearchControls();
+        }
+
+        private void dataGridAgencies_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //A row has been double clicked. We need to get the BrokerID value, extract the Broker instance
+            //and then pass this to the form to display the Broker.
+            int brokerIDSelected = Convert.ToInt32(dataGridAgencies.SelectedRows[0].Cells["BrokerID"].Value.ToString());
+
+            //PUT THIS IN A Using BLOCK?
+            JobLeadRepo thisJobLeadRepo = new JobLeadRepo();
+            iBroker brokerSelected = thisJobLeadRepo.GetBroker(brokerIDSelected);
+
+            frmBroker newBrokerForm = new frmBroker(brokerSelected);
+            newBrokerForm.ShowDialog();
+
+            //Now reinitialise the Job Lead Grid
+            ReloadAgencyBrokerGrid();
         }
     }
 }

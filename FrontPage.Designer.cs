@@ -48,11 +48,19 @@
             this.rBtnJobStatus = new System.Windows.Forms.RadioButton();
             this.rBtnJobDate = new System.Windows.Forms.RadioButton();
             this.rBtnJobTitle = new System.Windows.Forms.RadioButton();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabJobLeads = new System.Windows.Forms.TabPage();
+            this.tabAgencyBrokers = new System.Windows.Forms.TabPage();
+            this.dataGridAgencies = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.pnlFilterOptions.SuspendLayout();
             this.pnlStatusSearchOptions.SuspendLayout();
             this.pnlJobTitleSearchOptions.SuspendLayout();
             this.pnlDateSearchOptions.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabJobLeads.SuspendLayout();
+            this.tabAgencyBrokers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAgencies)).BeginInit();
             this.SuspendLayout();
             // 
             // btnClose
@@ -86,12 +94,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(12, 165);
+            this.dataGridView.Location = new System.Drawing.Point(6, 6);
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(998, 169);
+            this.dataGridView.Size = new System.Drawing.Size(978, 131);
             this.dataGridView.TabIndex = 4;
             this.dataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseDoubleClick);
             // 
@@ -264,15 +272,64 @@
             this.rBtnJobTitle.UseVisualStyleBackColor = true;
             this.rBtnJobTitle.Click += new System.EventHandler(this.rBtnJobTitle_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabJobLeads);
+            this.tabControl1.Controls.Add(this.tabAgencyBrokers);
+            this.tabControl1.Location = new System.Drawing.Point(12, 165);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(998, 169);
+            this.tabControl1.TabIndex = 10;
+            // 
+            // tabJobLeads
+            // 
+            this.tabJobLeads.Controls.Add(this.dataGridView);
+            this.tabJobLeads.Location = new System.Drawing.Point(4, 22);
+            this.tabJobLeads.Name = "tabJobLeads";
+            this.tabJobLeads.Padding = new System.Windows.Forms.Padding(3);
+            this.tabJobLeads.Size = new System.Drawing.Size(990, 143);
+            this.tabJobLeads.TabIndex = 0;
+            this.tabJobLeads.Text = "Job Leads";
+            this.tabJobLeads.UseVisualStyleBackColor = true;
+            // 
+            // tabAgencyBrokers
+            // 
+            this.tabAgencyBrokers.Controls.Add(this.dataGridAgencies);
+            this.tabAgencyBrokers.Location = new System.Drawing.Point(4, 22);
+            this.tabAgencyBrokers.Name = "tabAgencyBrokers";
+            this.tabAgencyBrokers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAgencyBrokers.Size = new System.Drawing.Size(990, 143);
+            this.tabAgencyBrokers.TabIndex = 1;
+            this.tabAgencyBrokers.Text = "Agencies";
+            this.tabAgencyBrokers.UseVisualStyleBackColor = true;
+            // 
+            // dataGridAgencies
+            // 
+            this.dataGridAgencies.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridAgencies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridAgencies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridAgencies.Location = new System.Drawing.Point(6, 6);
+            this.dataGridAgencies.Name = "dataGridAgencies";
+            this.dataGridAgencies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridAgencies.Size = new System.Drawing.Size(978, 131);
+            this.dataGridAgencies.TabIndex = 0;
+            this.dataGridAgencies.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridAgencies_CellMouseDoubleClick);
+            // 
             // frmFrontPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1022, 401);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.pnlFilterOptions);
             this.Controls.Add(this.btnNewBroker);
             this.Controls.Add(this.btnNewJobLead);
-            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.btnClose);
             this.Name = "frmFrontPage";
             this.Text = "Front Page";
@@ -284,6 +341,10 @@
             this.pnlJobTitleSearchOptions.PerformLayout();
             this.pnlDateSearchOptions.ResumeLayout(false);
             this.pnlDateSearchOptions.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabJobLeads.ResumeLayout(false);
+            this.tabAgencyBrokers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAgencies)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -310,6 +371,10 @@
         private System.Windows.Forms.Panel pnlStatusSearchOptions;
         private System.Windows.Forms.CheckedListBox chkListBoxStatus;
         private System.Windows.Forms.RadioButton rBtnJobAgent;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabJobLeads;
+        private System.Windows.Forms.TabPage tabAgencyBrokers;
+        private System.Windows.Forms.DataGridView dataGridAgencies;
     }
 }
 
