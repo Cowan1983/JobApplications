@@ -17,3 +17,4 @@ C:\C# Projects\Job_Applications_2017\JobApplications\obj\Debug\JobApplication.fr
 C:\C# Projects\Job_Applications_2017\JobApplications\obj\Debug\JobApplication.frmName.resources
 C:\C# Projects\Job_Applications_2017\JobApplications\obj\Debug\JobApplication.frmFrontPage.resources
 C:\C# Projects\Job_Applications_2017\JobApplications\obj\Debug\JobApplication.frmNote.resources
+C:\C# Projects\Job_Applications_2017\JobApplications\obj\Debug\JobApplication.frmScreenGrab.resources

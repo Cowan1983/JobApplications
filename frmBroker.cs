@@ -61,7 +61,7 @@ namespace JobApplication
 
         private void FillAgencyList()
         {
-            var allBrokerNames = from m in myBroker.Brokers select new {m.BrokerID, m.Name };
+            var allBrokerNames = from m in myBroker.Brokers orderby m.Name select new {m.BrokerID, m.Name };
 
             lstBoxAssociatedBrokers.DataSource = allBrokerNames.ToList();
             lstBoxAssociatedBrokers.ValueMember = "BrokerID";
@@ -71,7 +71,7 @@ namespace JobApplication
 
         private void FillContactList()
         {
-            var allContactNames = from m in myBroker.Contacts select new { m.Name.FullName, m.ContactID };
+            var allContactNames = from m in myBroker.Contacts orderby m.Name.Surname select new { m.Name.FullName, m.ContactID };
             lstBoxBrokerContacts.DataSource = allContactNames.ToList();
             lstBoxBrokerContacts.ValueMember = "ContactID";
             lstBoxBrokerContacts.DisplayMember = "FullName";

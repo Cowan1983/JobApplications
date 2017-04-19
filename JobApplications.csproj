@@ -111,6 +111,12 @@
     <Compile Include="frmNote.designer.cs">
       <DependentUpon>frmNote.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmScreenGrab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmScreenGrab.Designer.cs">
+      <DependentUpon>frmScreenGrab.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrontPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNote.resx">
       <DependentUpon>frmNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmScreenGrab.resx">
+      <DependentUpon>frmScreenGrab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrontPage.resx">
       <DependentUpon>FrontPage.cs</DependentUpon>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -174,6 +176,8 @@ namespace JobApplication
             txtBoxRefTwo.Text = myJobLead.Ref_Two;
             txtBoxRefThree.Text = myJobLead.Ref_Three;
             SetNotesCount();
+
+            
 
         }
 
@@ -435,6 +439,39 @@ namespace JobApplication
         {
             int notesCount = myJobLead.JobLeadNotes.Count;
             lblNotesCount.Text = "Job Notes - " + notesCount;
+        }
+
+        /// <summary>
+        /// Launch the window to attach a screen grab (most pobably a web page)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPasteFrmClipboard_Click(object sender, EventArgs e)
+        {
+
+            //Declare the ScreenGrab form we will launch
+            frmScreenGrab screenGrabForm;
+
+            //Depending on if we alreday have a screen grab for this job lead, use the
+            //appropriate from constructor
+            if(myJobLead.JobLeadImage == null)
+            {
+                screenGrabForm = new frmScreenGrab();
+            }
+            else
+            {
+                screenGrabForm = new frmScreenGrab(myJobLead.JobLeadImage);
+            }
+
+            //Show the form
+            screenGrabForm.ShowDialog();
+
+            //If a screen grab has been taken, set the value in this JobLead instance.
+            if(screenGrabForm.ScreenGrab != null)
+            {
+                myJobLead.JobLeadImage = screenGrabForm.ScreenGrab;
+            }
+
         }
     }
 }

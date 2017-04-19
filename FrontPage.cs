@@ -26,6 +26,9 @@ namespace JobApplication
 
             InitialiseStatusList();
 
+            ReloadJobLeadGrid();
+            ReloadAgencyBrokerGrid();
+
             //Find a better way of doing this....
             rBtnJobTitle.Checked = true;
             rBtnJobTitle_Click(null, null);

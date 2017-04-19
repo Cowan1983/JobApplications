@@ -41,7 +41,7 @@ namespace JobApplication
             using (var ctx = new JobLeadContext())
             {
                 var allLeadsTable = from m in ctx.JobLeads orderby m.JobLeadID descending
-                select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Employer = m.EmployerBroker.Name, Agency = m.AgencyBroker.Name, Contact = m.AgencyContact.Name.FirstName + " "  + m.AgencyContact.Name.Surname };
+                select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Employer = m.EmployerBroker.Name, Agency = m.AgencyBroker.Name, Contact = m.AgencyContact.Name.FirstName + " "  + m.AgencyContact.Name.Surname, Notes = m.JobLeadNotes.Count };
 
                 return allLeadsTable.ToList();
             }
@@ -140,6 +140,7 @@ namespace JobApplication
             {
                 var allBrokersList = from m in ctx.Brokers
                                      where m.IsAgency == isAgency
+                                     orderby m.Name
                                      select m;
 
                 return allBrokersList.ToList();
@@ -154,6 +155,7 @@ namespace JobApplication
                     .Include("Address")
                     .Include("Contacts.Address")
                     .Include("Contacts.Name")
+                    .Include("Contacts.ContactNotes")
                     .Include("Brokers")
                     .Include("BrokerNotes")
                     .Where(m => m.BrokerID == thisBrokerID)
@@ -253,6 +255,7 @@ namespace JobApplication
                     contextJobLeadEntity.Ref_One = myJobLead.Ref_One;
                     contextJobLeadEntity.Ref_Two = myJobLead.Ref_Two;
                     contextJobLeadEntity.Ref_Three = myJobLead.Ref_Three;
+                    contextJobLeadEntity.JobLeadImage = myJobLead.JobLeadImage;
 
                     //Now we attach the AgentBroker, AgentContact, EmployerBroker and EmployerContact sub entities
 
@@ -307,7 +310,7 @@ namespace JobApplication
                 
                 var brokerIDs = currentAssociatedBrokers.Select(x => x.BrokerID).ToArray();
                 //We invert the isAgency value so that we only find Employer brokers if this is am Agency broker, and vice versa (that's your actual Latin)
-                var allUnassociatedBrokers = ctx.Brokers.Where(x => !brokerIDs.Contains(x.BrokerID) && x.IsAgency == !isAgency );
+                var allUnassociatedBrokers = ctx.Brokers.Where(x => !brokerIDs.Contains(x.BrokerID) && x.IsAgency == !isAgency ).OrderBy(x => x.Name);
 
                 return allUnassociatedBrokers.ToList();
             }

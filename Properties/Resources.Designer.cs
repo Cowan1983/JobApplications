@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JobApplications.Properties {
+namespace JobApplication.Properties {
     using System;
     
     

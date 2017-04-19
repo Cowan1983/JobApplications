@@ -64,6 +64,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddNote = new System.Windows.Forms.Button();
             this.lblNotesCount = new System.Windows.Forms.Label();
+            this.btnPasteFrmClipboard = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblCurrentJobStatus
@@ -389,11 +390,22 @@
             this.lblNotesCount.TabIndex = 46;
             this.lblNotesCount.Text = "<Notes Count Here>";
             // 
+            // btnPasteFrmClipboard
+            // 
+            this.btnPasteFrmClipboard.Location = new System.Drawing.Point(487, 200);
+            this.btnPasteFrmClipboard.Name = "btnPasteFrmClipboard";
+            this.btnPasteFrmClipboard.Size = new System.Drawing.Size(135, 23);
+            this.btnPasteFrmClipboard.TabIndex = 48;
+            this.btnPasteFrmClipboard.Text = "Screen Grab";
+            this.btnPasteFrmClipboard.UseVisualStyleBackColor = true;
+            this.btnPasteFrmClipboard.Click += new System.EventHandler(this.btnPasteFrmClipboard_Click);
+            // 
             // frmJobLead
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(783, 440);
+            this.Controls.Add(this.btnPasteFrmClipboard);
             this.Controls.Add(this.lblNotesCount);
             this.Controls.Add(this.btnAddNote);
             this.Controls.Add(this.btnCancel);
@@ -475,5 +487,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAddNote;
         private System.Windows.Forms.Label lblNotesCount;
+        private System.Windows.Forms.Button btnPasteFrmClipboard;
     }
 }

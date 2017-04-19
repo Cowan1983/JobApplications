@@ -73,6 +73,7 @@ namespace JobApplication
         int? AgencyBrokerID { get; set; }
         Broker EmployerBroker { get; set; }
         int? EmployerBrokerID { get; set; }
+        byte[] JobLeadImage { get; set; }
         DateTime Date { get; set; }
         string CVOrApplicationLocation { get; set; }
         string CoverLetterLocation { get; set; }

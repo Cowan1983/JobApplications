@@ -43,6 +43,10 @@ namespace JobApplication
         [ForeignKey("EmployerBrokerID")]
         public Broker EmployerBroker { get; set; }
 
+        //Declare the database column that will contain the job lead screen grab
+        [Column(TypeName = "image")]
+        public byte[] JobLeadImage { get; set; }
+
 
         public DateTime Date { get; set; }
         public string CVOrApplicationLocation { get; set; }
