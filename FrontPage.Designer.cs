@@ -52,6 +52,8 @@
             this.tabJobLeads = new System.Windows.Forms.TabPage();
             this.tabAgencyBrokers = new System.Windows.Forms.TabPage();
             this.dataGridAgencies = new System.Windows.Forms.DataGridView();
+            this.cboBrokerList = new System.Windows.Forms.ComboBox();
+            this.rBtnJobEmployer = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.pnlFilterOptions.SuspendLayout();
             this.pnlStatusSearchOptions.SuspendLayout();
@@ -127,8 +129,10 @@
             // 
             // pnlFilterOptions
             // 
-            this.pnlFilterOptions.Controls.Add(this.rBtnJobAgent);
+            this.pnlFilterOptions.Controls.Add(this.cboBrokerList);
+            this.pnlFilterOptions.Controls.Add(this.rBtnJobEmployer);
             this.pnlFilterOptions.Controls.Add(this.pnlStatusSearchOptions);
+            this.pnlFilterOptions.Controls.Add(this.rBtnJobAgent);
             this.pnlFilterOptions.Controls.Add(this.btnSearchJobLeads);
             this.pnlFilterOptions.Controls.Add(this.pnlJobTitleSearchOptions);
             this.pnlFilterOptions.Controls.Add(this.pnlDateSearchOptions);
@@ -147,9 +151,9 @@
             this.rBtnJobAgent.AutoSize = true;
             this.rBtnJobAgent.Location = new System.Drawing.Point(8, 102);
             this.rBtnJobAgent.Name = "rBtnJobAgent";
-            this.rBtnJobAgent.Size = new System.Drawing.Size(101, 17);
+            this.rBtnJobAgent.Size = new System.Drawing.Size(53, 17);
             this.rBtnJobAgent.TabIndex = 6;
-            this.rBtnJobAgent.Text = "Agent/Employer";
+            this.rBtnJobAgent.Text = "Agent";
             this.rBtnJobAgent.UseVisualStyleBackColor = true;
             this.rBtnJobAgent.Click += new System.EventHandler(this.rBtnJobAgent_Click);
             // 
@@ -321,6 +325,27 @@
             this.dataGridAgencies.TabIndex = 0;
             this.dataGridAgencies.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridAgencies_CellMouseDoubleClick);
             // 
+            // cboBrokerList
+            // 
+            this.cboBrokerList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboBrokerList.FormattingEnabled = true;
+            this.cboBrokerList.Location = new System.Drawing.Point(112, 102);
+            this.cboBrokerList.Name = "cboBrokerList";
+            this.cboBrokerList.Size = new System.Drawing.Size(264, 21);
+            this.cboBrokerList.TabIndex = 11;
+            this.cboBrokerList.Visible = false;
+            // 
+            // rBtnJobEmployer
+            // 
+            this.rBtnJobEmployer.AutoSize = true;
+            this.rBtnJobEmployer.Location = new System.Drawing.Point(8, 125);
+            this.rBtnJobEmployer.Name = "rBtnJobEmployer";
+            this.rBtnJobEmployer.Size = new System.Drawing.Size(68, 17);
+            this.rBtnJobEmployer.TabIndex = 12;
+            this.rBtnJobEmployer.Text = "Employer";
+            this.rBtnJobEmployer.UseVisualStyleBackColor = true;
+            this.rBtnJobEmployer.Click += new System.EventHandler(this.rBtnJobEmployer_Click);
+            // 
             // frmFrontPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,6 +400,8 @@
         private System.Windows.Forms.TabPage tabJobLeads;
         private System.Windows.Forms.TabPage tabAgencyBrokers;
         private System.Windows.Forms.DataGridView dataGridAgencies;
+        private System.Windows.Forms.ComboBox cboBrokerList;
+        private System.Windows.Forms.RadioButton rBtnJobEmployer;
     }
 }
 

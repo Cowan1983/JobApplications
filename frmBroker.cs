@@ -27,6 +27,8 @@ namespace JobApplication
             //Default to Agency for new brokers
             rButtonAgencyBroker.Checked = isAgency;
             rButtonEmployerBroker.Checked = !isAgency;
+
+            SetNotesCount();
         }
 
         public frmBroker (iBroker myBrokerInstance)
@@ -56,6 +58,8 @@ namespace JobApplication
             {
                 rButtonEmployerBroker.Checked = true;
             }
+
+            SetNotesCount();
 
         }
 
@@ -109,7 +113,10 @@ namespace JobApplication
             //Rebuild both lists
             FillAgencyList();
             FillUnassociatedBrokerList();
-            
+
+            pnlUnassociatedBrokers.Visible = false;
+
+
         }
 
         private void btnUpdateClose_Click(object sender, EventArgs e)
@@ -214,14 +221,14 @@ namespace JobApplication
                 myBroker.IsAgency = true;
                 btnAssociateBroker.Text = "Add Employer";
                 btnAddBroker.Text = "Add Employer";
-                lblAssociatedBrokers.Text = "Associated Employers";
+                lblAssociatedBrokers.Text = "Associated Employers:";
             }
             else
             {
                 myBroker.IsAgency = false;
                 btnAssociateBroker.Text = "Add Agency";
                 btnAddBroker.Text = "Add Agency";
-                lblAssociatedBrokers.Text = "Associated Agencies";
+                lblAssociatedBrokers.Text = "Associated Agencies:";
             }
         }
 
@@ -246,6 +253,14 @@ namespace JobApplication
             {
                 myBroker.BrokerNotes.Add(newBrokerNote);
             }
+
+            SetNotesCount();
+        }
+
+        private void SetNotesCount()
+        {
+            int notesCount = myBroker.BrokerNotes.Count;
+            lblNotesCount.Text = (myBroker.IsAgency? "Agency " : "Employer ") + "Notes - " + notesCount;
         }
     }
 }

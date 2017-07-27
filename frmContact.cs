@@ -28,7 +28,10 @@ namespace JobApplication
 
             myContact.Address = (Address)parentAddress;
 
-            rTextBoxContactAddress.Text = myContact.Address.FullAddress;
+            //It is possible that the address passed is NULL (the parent agency has not been set)
+            rTextBoxContactAddress.Text = myContact.Address == null? "" : myContact.Address.FullAddress;
+
+            SetNotesCount();
 
         }
 
@@ -45,7 +48,10 @@ namespace JobApplication
             txtBoxContactEmail.Text = myContact.Email;
             txtBoxContactLandLineNo.Text = myContact.LandLineTelNo;
             txtBoxContactMobileNo.Text = myContact.MobileTelNo;
-            rTextBoxContactAddress.Text = myContact.Address.FullAddress;
+            //It is possible that the address passed is NULL (the parent agency has not been set)
+            rTextBoxContactAddress.Text = myContact.Address == null ? "" : myContact.Address.FullAddress;
+
+            SetNotesCount();
 
         }
 
@@ -134,6 +140,14 @@ namespace JobApplication
             {
                 myContact.ContactNotes.Add(newContactNote);
             }
+
+            SetNotesCount();
+        }
+
+        private void SetNotesCount()
+        {
+            int notesCount = myContact.ContactNotes.Count;
+            lblNotesCount.Text = "Contact Notes - " + notesCount;
         }
     }
 }

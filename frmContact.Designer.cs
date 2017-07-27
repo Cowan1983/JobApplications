@@ -47,11 +47,12 @@
             this.lblContactLandLineNo = new System.Windows.Forms.Label();
             this.lblContactMobileNo = new System.Windows.Forms.Label();
             this.btnAddNote = new System.Windows.Forms.Button();
+            this.lblNotesCount = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancelCloseAddress
             // 
-            this.btnCancelCloseAddress.Location = new System.Drawing.Point(227, 319);
+            this.btnCancelCloseAddress.Location = new System.Drawing.Point(223, 345);
             this.btnCancelCloseAddress.Name = "btnCancelCloseAddress";
             this.btnCancelCloseAddress.Size = new System.Drawing.Size(103, 23);
             this.btnCancelCloseAddress.TabIndex = 3;
@@ -61,7 +62,7 @@
             // 
             // btnUpdateCloseAddress
             // 
-            this.btnUpdateCloseAddress.Location = new System.Drawing.Point(84, 319);
+            this.btnUpdateCloseAddress.Location = new System.Drawing.Point(84, 345);
             this.btnUpdateCloseAddress.Name = "btnUpdateCloseAddress";
             this.btnUpdateCloseAddress.Size = new System.Drawing.Size(106, 23);
             this.btnUpdateCloseAddress.TabIndex = 2;
@@ -210,19 +211,29 @@
             // 
             // btnAddNote
             // 
-            this.btnAddNote.Location = new System.Drawing.Point(270, 279);
+            this.btnAddNote.Location = new System.Drawing.Point(84, 308);
             this.btnAddNote.Name = "btnAddNote";
-            this.btnAddNote.Size = new System.Drawing.Size(122, 23);
+            this.btnAddNote.Size = new System.Drawing.Size(112, 23);
             this.btnAddNote.TabIndex = 46;
             this.btnAddNote.Text = "Add and View Notes";
             this.btnAddNote.UseVisualStyleBackColor = true;
             this.btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
             // 
+            // lblNotesCount
+            // 
+            this.lblNotesCount.AutoSize = true;
+            this.lblNotesCount.Location = new System.Drawing.Point(202, 313);
+            this.lblNotesCount.Name = "lblNotesCount";
+            this.lblNotesCount.Size = new System.Drawing.Size(104, 13);
+            this.lblNotesCount.TabIndex = 49;
+            this.lblNotesCount.Text = "<Notes Count Here>";
+            // 
             // frmContact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 354);
+            this.ClientSize = new System.Drawing.Size(447, 380);
+            this.Controls.Add(this.lblNotesCount);
             this.Controls.Add(this.btnAddNote);
             this.Controls.Add(this.lblContactMobileNo);
             this.Controls.Add(this.lblContactLandLineNo);
@@ -270,5 +281,6 @@
         private System.Windows.Forms.Label lblContactLandLineNo;
         private System.Windows.Forms.Label lblContactMobileNo;
         private System.Windows.Forms.Button btnAddNote;
+        private System.Windows.Forms.Label lblNotesCount;
     }
 }

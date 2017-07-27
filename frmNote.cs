@@ -51,7 +51,7 @@ namespace JobApplication
         private void btnUpdateCloseNote_Click(object sender, EventArgs e)
         {
             //Update the instance
-            myNote.NoteText = rTextBoxNote.Text;
+            myNote.NoteText = rTextBoxNote.Text.Replace("\n", @"\b0 \line "); //To cope with multiline notes (and \n not being saved in the database), we replace the newline character.
 
             //Save the new Note instance.
             myNote = myNote.Save();

@@ -433,6 +433,8 @@ namespace JobApplication
             {
                 myJobLead.JobLeadNotes.Add(newJobNote);
             }
+
+            SetNotesCount();
         }
 
         private void SetNotesCount()

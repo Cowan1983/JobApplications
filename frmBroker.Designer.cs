@@ -54,6 +54,7 @@
             this.btnAssociateBroker = new System.Windows.Forms.Button();
             this.lstBoxUnassociatedBrokers = new System.Windows.Forms.ListBox();
             this.btnAddNote = new System.Windows.Forms.Button();
+            this.lblNotesCount = new System.Windows.Forms.Label();
             this.pnlBrokerType.SuspendLayout();
             this.pnlUnassociatedBrokers.SuspendLayout();
             this.SuspendLayout();
@@ -81,15 +82,15 @@
             // lstBoxAssociatedBrokers
             // 
             this.lstBoxAssociatedBrokers.FormattingEnabled = true;
-            this.lstBoxAssociatedBrokers.Location = new System.Drawing.Point(7, 163);
+            this.lstBoxAssociatedBrokers.Location = new System.Drawing.Point(137, 218);
             this.lstBoxAssociatedBrokers.Name = "lstBoxAssociatedBrokers";
-            this.lstBoxAssociatedBrokers.Size = new System.Drawing.Size(186, 95);
+            this.lstBoxAssociatedBrokers.Size = new System.Drawing.Size(186, 108);
             this.lstBoxAssociatedBrokers.TabIndex = 2;
             // 
             // lstBoxBrokerContacts
             // 
             this.lstBoxBrokerContacts.FormattingEnabled = true;
-            this.lstBoxBrokerContacts.Location = new System.Drawing.Point(7, 317);
+            this.lstBoxBrokerContacts.Location = new System.Drawing.Point(137, 361);
             this.lstBoxBrokerContacts.Name = "lstBoxBrokerContacts";
             this.lstBoxBrokerContacts.Size = new System.Drawing.Size(186, 95);
             this.lstBoxBrokerContacts.TabIndex = 3;
@@ -97,36 +98,36 @@
             // lblBrokerContacts
             // 
             this.lblBrokerContacts.AutoSize = true;
-            this.lblBrokerContacts.Location = new System.Drawing.Point(7, 301);
+            this.lblBrokerContacts.Location = new System.Drawing.Point(7, 364);
             this.lblBrokerContacts.Name = "lblBrokerContacts";
-            this.lblBrokerContacts.Size = new System.Drawing.Size(49, 13);
+            this.lblBrokerContacts.Size = new System.Drawing.Size(52, 13);
             this.lblBrokerContacts.TabIndex = 4;
-            this.lblBrokerContacts.Text = "Contacts";
+            this.lblBrokerContacts.Text = "Contacts:";
             // 
             // lblAssociatedBrokers
             // 
             this.lblAssociatedBrokers.AutoSize = true;
-            this.lblAssociatedBrokers.Location = new System.Drawing.Point(7, 147);
+            this.lblAssociatedBrokers.Location = new System.Drawing.Point(9, 218);
             this.lblAssociatedBrokers.Name = "lblAssociatedBrokers";
-            this.lblAssociatedBrokers.Size = new System.Drawing.Size(98, 13);
+            this.lblAssociatedBrokers.Size = new System.Drawing.Size(101, 13);
             this.lblAssociatedBrokers.TabIndex = 5;
-            this.lblAssociatedBrokers.Text = "Associated Brokers";
+            this.lblAssociatedBrokers.Text = "Associated Brokers:";
             // 
             // btnEditContact
             // 
-            this.btnEditContact.Location = new System.Drawing.Point(208, 328);
+            this.btnEditContact.Location = new System.Drawing.Point(329, 361);
             this.btnEditContact.Name = "btnEditContact";
-            this.btnEditContact.Size = new System.Drawing.Size(84, 23);
+            this.btnEditContact.Size = new System.Drawing.Size(105, 23);
             this.btnEditContact.TabIndex = 6;
-            this.btnEditContact.Text = "Edit Contact";
+            this.btnEditContact.Text = "View/Edit Contact";
             this.btnEditContact.UseVisualStyleBackColor = true;
             this.btnEditContact.Click += new System.EventHandler(this.btnEditContact_Click);
             // 
             // btnNewContact
             // 
-            this.btnNewContact.Location = new System.Drawing.Point(208, 357);
+            this.btnNewContact.Location = new System.Drawing.Point(329, 390);
             this.btnNewContact.Name = "btnNewContact";
-            this.btnNewContact.Size = new System.Drawing.Size(84, 23);
+            this.btnNewContact.Size = new System.Drawing.Size(105, 23);
             this.btnNewContact.TabIndex = 7;
             this.btnNewContact.Text = "New Contact";
             this.btnNewContact.UseVisualStyleBackColor = true;
@@ -134,7 +135,7 @@
             // 
             // btnAddBroker
             // 
-            this.btnAddBroker.Location = new System.Drawing.Point(199, 177);
+            this.btnAddBroker.Location = new System.Drawing.Point(329, 263);
             this.btnAddBroker.Name = "btnAddBroker";
             this.btnAddBroker.Size = new System.Drawing.Size(84, 23);
             this.btnAddBroker.TabIndex = 8;
@@ -145,7 +146,7 @@
             // rTxtBoxBrokerAddress
             // 
             this.rTxtBoxBrokerAddress.Enabled = false;
-            this.rTxtBoxBrokerAddress.Location = new System.Drawing.Point(364, 163);
+            this.rTxtBoxBrokerAddress.Location = new System.Drawing.Point(137, 101);
             this.rTxtBoxBrokerAddress.Name = "rTxtBoxBrokerAddress";
             this.rTxtBoxBrokerAddress.Size = new System.Drawing.Size(249, 95);
             this.rTxtBoxBrokerAddress.TabIndex = 9;
@@ -154,15 +155,15 @@
             // lblBrokerAddress
             // 
             this.lblBrokerAddress.AutoSize = true;
-            this.lblBrokerAddress.Location = new System.Drawing.Point(372, 147);
+            this.lblBrokerAddress.Location = new System.Drawing.Point(7, 102);
             this.lblBrokerAddress.Name = "lblBrokerAddress";
-            this.lblBrokerAddress.Size = new System.Drawing.Size(45, 13);
+            this.lblBrokerAddress.Size = new System.Drawing.Size(48, 13);
             this.lblBrokerAddress.TabIndex = 10;
-            this.lblBrokerAddress.Text = "Address";
+            this.lblBrokerAddress.Text = "Address:";
             // 
             // btnEditAddress
             // 
-            this.btnEditAddress.Location = new System.Drawing.Point(629, 171);
+            this.btnEditAddress.Location = new System.Drawing.Point(392, 101);
             this.btnEditAddress.Name = "btnEditAddress";
             this.btnEditAddress.Size = new System.Drawing.Size(87, 23);
             this.btnEditAddress.TabIndex = 11;
@@ -172,7 +173,7 @@
             // 
             // btnNewAddress
             // 
-            this.btnNewAddress.Location = new System.Drawing.Point(629, 200);
+            this.btnNewAddress.Location = new System.Drawing.Point(392, 130);
             this.btnNewAddress.Name = "btnNewAddress";
             this.btnNewAddress.Size = new System.Drawing.Size(87, 23);
             this.btnNewAddress.TabIndex = 12;
@@ -182,7 +183,7 @@
             // 
             // txtBoxBrokerName
             // 
-            this.txtBoxBrokerName.Location = new System.Drawing.Point(53, 6);
+            this.txtBoxBrokerName.Location = new System.Drawing.Point(137, 8);
             this.txtBoxBrokerName.Name = "txtBoxBrokerName";
             this.txtBoxBrokerName.Size = new System.Drawing.Size(342, 20);
             this.txtBoxBrokerName.TabIndex = 13;
@@ -190,7 +191,7 @@
             // lblBrokerName
             // 
             this.lblBrokerName.AutoSize = true;
-            this.lblBrokerName.Location = new System.Drawing.Point(9, 9);
+            this.lblBrokerName.Location = new System.Drawing.Point(7, 9);
             this.lblBrokerName.Name = "lblBrokerName";
             this.lblBrokerName.Size = new System.Drawing.Size(38, 13);
             this.lblBrokerName.TabIndex = 14;
@@ -199,7 +200,7 @@
             // lblLandLinePhoneNo
             // 
             this.lblLandLinePhoneNo.AutoSize = true;
-            this.lblLandLinePhoneNo.Location = new System.Drawing.Point(12, 38);
+            this.lblLandLinePhoneNo.Location = new System.Drawing.Point(7, 38);
             this.lblLandLinePhoneNo.Name = "lblLandLinePhoneNo";
             this.lblLandLinePhoneNo.Size = new System.Drawing.Size(77, 13);
             this.lblLandLinePhoneNo.TabIndex = 15;
@@ -207,22 +208,22 @@
             // 
             // txtBoxLandLinePhoneNo
             // 
-            this.txtBoxLandLinePhoneNo.Location = new System.Drawing.Point(95, 35);
+            this.txtBoxLandLinePhoneNo.Location = new System.Drawing.Point(137, 37);
             this.txtBoxLandLinePhoneNo.Name = "txtBoxLandLinePhoneNo";
-            this.txtBoxLandLinePhoneNo.Size = new System.Drawing.Size(300, 20);
+            this.txtBoxLandLinePhoneNo.Size = new System.Drawing.Size(342, 20);
             this.txtBoxLandLinePhoneNo.TabIndex = 16;
             // 
             // txtBoxWebSite
             // 
-            this.txtBoxWebSite.Location = new System.Drawing.Point(67, 69);
+            this.txtBoxWebSite.Location = new System.Drawing.Point(137, 71);
             this.txtBoxWebSite.Name = "txtBoxWebSite";
-            this.txtBoxWebSite.Size = new System.Drawing.Size(328, 20);
+            this.txtBoxWebSite.Size = new System.Drawing.Size(342, 20);
             this.txtBoxWebSite.TabIndex = 17;
             // 
             // lblWebSite
             // 
             this.lblWebSite.AutoSize = true;
-            this.lblWebSite.Location = new System.Drawing.Point(7, 72);
+            this.lblWebSite.Location = new System.Drawing.Point(7, 71);
             this.lblWebSite.Name = "lblWebSite";
             this.lblWebSite.Size = new System.Drawing.Size(54, 13);
             this.lblWebSite.TabIndex = 18;
@@ -232,15 +233,15 @@
             // 
             this.pnlBrokerType.Controls.Add(this.rButtonEmployerBroker);
             this.pnlBrokerType.Controls.Add(this.rButtonAgencyBroker);
-            this.pnlBrokerType.Location = new System.Drawing.Point(413, 12);
+            this.pnlBrokerType.Location = new System.Drawing.Point(526, 8);
             this.pnlBrokerType.Name = "pnlBrokerType";
-            this.pnlBrokerType.Size = new System.Drawing.Size(90, 63);
+            this.pnlBrokerType.Size = new System.Drawing.Size(151, 29);
             this.pnlBrokerType.TabIndex = 19;
             // 
             // rButtonEmployerBroker
             // 
             this.rButtonEmployerBroker.AutoSize = true;
-            this.rButtonEmployerBroker.Location = new System.Drawing.Point(13, 35);
+            this.rButtonEmployerBroker.Location = new System.Drawing.Point(66, 3);
             this.rButtonEmployerBroker.Name = "rButtonEmployerBroker";
             this.rButtonEmployerBroker.Size = new System.Drawing.Size(68, 17);
             this.rButtonEmployerBroker.TabIndex = 1;
@@ -252,7 +253,7 @@
             // rButtonAgencyBroker
             // 
             this.rButtonAgencyBroker.AutoSize = true;
-            this.rButtonAgencyBroker.Location = new System.Drawing.Point(13, 12);
+            this.rButtonAgencyBroker.Location = new System.Drawing.Point(3, 3);
             this.rButtonAgencyBroker.Name = "rButtonAgencyBroker";
             this.rButtonAgencyBroker.Size = new System.Drawing.Size(61, 17);
             this.rButtonAgencyBroker.TabIndex = 0;
@@ -265,10 +266,11 @@
             // 
             this.pnlUnassociatedBrokers.Controls.Add(this.btnAssociateBroker);
             this.pnlUnassociatedBrokers.Controls.Add(this.lstBoxUnassociatedBrokers);
-            this.pnlUnassociatedBrokers.Location = new System.Drawing.Point(389, 317);
+            this.pnlUnassociatedBrokers.Location = new System.Drawing.Point(438, 218);
             this.pnlUnassociatedBrokers.Name = "pnlUnassociatedBrokers";
             this.pnlUnassociatedBrokers.Size = new System.Drawing.Size(200, 140);
             this.pnlUnassociatedBrokers.TabIndex = 2;
+            this.pnlUnassociatedBrokers.Visible = false;
             // 
             // btnAssociateBroker
             // 
@@ -290,7 +292,7 @@
             // 
             // btnAddNote
             // 
-            this.btnAddNote.Location = new System.Drawing.Point(7, 444);
+            this.btnAddNote.Location = new System.Drawing.Point(516, 69);
             this.btnAddNote.Name = "btnAddNote";
             this.btnAddNote.Size = new System.Drawing.Size(122, 23);
             this.btnAddNote.TabIndex = 47;
@@ -298,11 +300,21 @@
             this.btnAddNote.UseVisualStyleBackColor = true;
             this.btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
             // 
+            // lblNotesCount
+            // 
+            this.lblNotesCount.AutoSize = true;
+            this.lblNotesCount.Location = new System.Drawing.Point(653, 74);
+            this.lblNotesCount.Name = "lblNotesCount";
+            this.lblNotesCount.Size = new System.Drawing.Size(104, 13);
+            this.lblNotesCount.TabIndex = 48;
+            this.lblNotesCount.Text = "<Notes Count Here>";
+            // 
             // frmBroker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 557);
+            this.Controls.Add(this.lblNotesCount);
             this.Controls.Add(this.btnAddNote);
             this.Controls.Add(this.pnlUnassociatedBrokers);
             this.Controls.Add(this.pnlBrokerType);
@@ -363,5 +375,6 @@
         private System.Windows.Forms.Button btnAssociateBroker;
         private System.Windows.Forms.ListBox lstBoxUnassociatedBrokers;
         private System.Windows.Forms.Button btnAddNote;
+        private System.Windows.Forms.Label lblNotesCount;
     }
 }

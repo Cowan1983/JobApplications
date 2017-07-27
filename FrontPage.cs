@@ -338,7 +338,7 @@ namespace JobApplication
 
             ReloadAgencyBrokerGrid();
 
-
+            ResetSearchControls();
         }
 
         private void dataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -393,11 +393,12 @@ namespace JobApplication
 
         private void btnSearchJobLeads_Click(object sender, EventArgs e)
         {
-            //We (currently) have four different search facilities.
+            //We (currently) have five/six different search facilities.
             //Job Title
             //Date Range
             //Status
             //Reference value
+            //Agency or Broker Name
 
             JobLeadRepo thisJobLeadRepo = new JobLeadRepo();
 
@@ -421,8 +422,9 @@ namespace JobApplication
                     dataGridView.DataSource = thisJobLeadRepo.GetJobRefFilteredJobLeadGridDatsSource(txtBoxSearchText.Text);
                     break;
 
-                case "BrokerType":
-                    dataGridView.DataSource = thisJobLeadRepo.GetJobBrokerFilteredJobLeadGridDataSource(txtBoxSearchText.Text);
+                case "AgencyType":
+                case "EmployerType" :
+                    dataGridView.DataSource = thisJobLeadRepo.GetJobBrokerFilteredJobLeadGridDataSource(cboBrokerList.Text);
                     break;
 
                 default:
@@ -439,38 +441,49 @@ namespace JobApplication
             {
                 case "JobType":
                     pnlDateSearchOptions.Visible = false;
+                    txtBoxSearchText.Text = "";
                     pnlJobTitleSearchOptions.Visible = true;
                     pnlStatusSearchOptions.Visible = false;
+                    cboBrokerList.Visible = false;
                     break;
 
                 case "DateType":
                     pnlDateSearchOptions.Visible = true;
                     pnlJobTitleSearchOptions.Visible = false;
                     pnlStatusSearchOptions.Visible = false;
+                    cboBrokerList.Visible = false;
                     break;
 
                 case "StatusType":
                     pnlDateSearchOptions.Visible = false;
                     pnlJobTitleSearchOptions.Visible = false;
                     pnlStatusSearchOptions.Visible = true;
+                    cboBrokerList.Visible = false;
                     break;
 
                 case "ReferenceType":
                     pnlDateSearchOptions.Visible = false;
+                    txtBoxSearchText.Text = "";
                     pnlJobTitleSearchOptions.Visible = true;
                     pnlStatusSearchOptions.Visible = false;
+                    cboBrokerList.Visible = false;
                     break;
 
-                case "BrokerType":
+                case "AgencyType":
+                case "EmployerType":
                     pnlDateSearchOptions.Visible = false;
-                    pnlJobTitleSearchOptions.Visible = true;
+                    pnlJobTitleSearchOptions.Visible = false;
                     pnlStatusSearchOptions.Visible = false;
+                    JobLeadRepo thisJobLeadRepo = new JobLeadRepo();
+                    cboBrokerList.DataSource = thisJobLeadRepo.GetAllBrokersNames(searchType == "EmployerType"? false: true);
+                    cboBrokerList.Visible = true;
                     break;
 
                 default:
                     pnlDateSearchOptions.Visible = false;
                     pnlJobTitleSearchOptions.Visible = false;
                     pnlStatusSearchOptions.Visible = false;
+                    cboBrokerList.Visible = false;
                     break;
             }
         }
@@ -503,7 +516,13 @@ namespace JobApplication
 
         private void rBtnJobAgent_Click(object sender, EventArgs e)
         {
-            searchType = "BrokerType";
+            searchType = "AgencyType";
+            SetSearchControls();
+        }
+
+        private void rBtnJobEmployer_Click(object sender, EventArgs e)
+        {
+            searchType = "EmployerType";
             SetSearchControls();
         }
 
@@ -523,5 +542,16 @@ namespace JobApplication
             //Now reinitialise the Job Lead Grid
             ReloadAgencyBrokerGrid();
         }
+
+        private void ResetSearchControls()
+        {
+            //Reset the search controls data
+            rBtnJobTitle.Checked = true;
+            searchType = "JobType";
+            SetSearchControls();
+
+        }
+
+
     }
 }

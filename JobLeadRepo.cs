@@ -20,13 +20,17 @@ namespace JobApplication
                     .Include("AgencyBroker")
                     .Include("AgencyBroker.Brokers")
                     .Include("AgencyBroker.Address")
+                    .Include("AgencyBroker.BrokerNotes")
                     .Include("AgencyBroker.Contacts.Address")
                     .Include("AgencyBroker.Contacts.Name")
+                    .Include("AgencyBroker.Contacts.ContactNotes")
                     .Include("EmployerBroker")
                     .Include("EmployerBroker.Brokers")
                     .Include("EmployerBroker.Address")
+                    .Include("EmployerBroker.BrokerNotes")
                     .Include("EmployerBroker.Contacts.Address")
                     .Include("EmployerBroker.Contacts.Name")
+                    .Include("EmployerBroker.Contacts.ContactNotes")
                     .Include("JobLeadNotes")
                     .Where(s => s.JobLeadID == myJobLeadID)
                     .FirstOrDefault<iJobLead>();
@@ -54,7 +58,7 @@ namespace JobApplication
                 var allAgencyTable = from m in ctx.Brokers
                                      where m.IsAgency == true
                                      orderby m.Name ascending
-                                     select new { m.BrokerID, m.Name, Address = m.Address.BodyText + ", " + m.Address.City + ", " + m.Address.Postcode, Phone = m.LandLineTelNo };
+                                     select new { m.BrokerID, m.Name, Address = m.Address.BodyText.Replace(",", ", ") + ", " + m.Address.City + ", " + m.Address.Postcode, Phone = m.LandLineTelNo, Notes = m.BrokerNotes.Count };
 
                 return allAgencyTable.ToList();
             }
@@ -68,7 +72,9 @@ namespace JobApplication
             {
                 var allLeadsTable = from m in ctx.JobLeads
                                     where m.Ref_One.Contains(jobRefToSearchFor) || m.Ref_Two.Contains(jobRefToSearchFor) || m.Ref_Three.Contains(jobRefToSearchFor)
-                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+                                    orderby m.JobLeadID descending
+                                    //select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Employer = m.EmployerBroker.Name, Agency = m.AgencyBroker.Name, Contact = m.AgencyContact.Name.FirstName + " " + m.AgencyContact.Name.Surname, Notes = m.JobLeadNotes.Count };
 
                 return allLeadsTable.ToList();
             }
@@ -80,7 +86,9 @@ namespace JobApplication
             {
                 var allLeadsTable = from m in ctx.JobLeads
                                     where m.JobTitle.Contains(jobTitleToSearchFor)
-                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+                                    orderby m.JobLeadID descending
+                                    //select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Employer = m.EmployerBroker.Name, Agency = m.AgencyBroker.Name, Contact = m.AgencyContact.Name.FirstName + " " + m.AgencyContact.Name.Surname, Notes = m.JobLeadNotes.Count };
 
                 return allLeadsTable.ToList();
             }
@@ -92,7 +100,9 @@ namespace JobApplication
             {
                 var allLeadsTable = from m in ctx.JobLeads
                                     where m.Date > startDate && m.Date < endDate
-                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+                                    orderby m.JobLeadID descending
+                                    //select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Employer = m.EmployerBroker.Name, Agency = m.AgencyBroker.Name, Contact = m.AgencyContact.Name.FirstName + " " + m.AgencyContact.Name.Surname, Notes = m.JobLeadNotes.Count };
 
                 return allLeadsTable.ToList();
             }
@@ -104,7 +114,9 @@ namespace JobApplication
             {
                 var allLeadsTable = from m in ctx.JobLeads
                                     where jobStatusToSearchFor.Contains(m.Status)
-                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+                                    orderby m.JobLeadID descending
+                                    //select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Employer = m.EmployerBroker.Name, Agency = m.AgencyBroker.Name, Contact = m.AgencyContact.Name.FirstName + " " + m.AgencyContact.Name.Surname, Notes = m.JobLeadNotes.Count };
 
                 return allLeadsTable.ToList();
             }
@@ -116,7 +128,9 @@ namespace JobApplication
             {
                 var allLeadsTable = from m in ctx.JobLeads
                                     where m.AgencyBroker.Name.Contains(brokerToSearchFor) || m.EmployerBroker.Name.Contains(brokerToSearchFor)
-                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+                                    orderby m.JobLeadID descending
+                                    //select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Agency = m.AgencyBroker.Name };
+                                    select new { m.JobLeadID, m.JobTitle, m.Date, m.Status, m.Ref_One, m.Ref_Two, m.Ref_Three, Employer = m.EmployerBroker.Name, Agency = m.AgencyBroker.Name, Contact = m.AgencyContact.Name.FirstName + " " + m.AgencyContact.Name.Surname, Notes = m.JobLeadNotes.Count };
 
                 return allLeadsTable.ToList();
             }
@@ -134,6 +148,19 @@ namespace JobApplication
             return GetAllBrokers(true);
         }
         
+        public object GetAllBrokersNames(bool isAgency)
+        {
+            using (var ctx = new JobLeadContext())
+            {
+                var allBrokersList = from m in ctx.Brokers
+                                     where m.IsAgency == isAgency
+                                     orderby m.Name
+                                     select m.Name;
+
+                return allBrokersList.ToList();
+            }
+        }
+
         public object GetAllBrokers(bool isAgency)
         {
             using (var ctx = new JobLeadContext())
