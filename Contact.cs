@@ -16,6 +16,10 @@ namespace JobApplication
         [Key]
         public int ContactID { get; set; }
 
+        public int? BrokerID { get; set; }
+        [ForeignKey("BrokerID")]
+        public Broker Broker { get; set; }
+
         //This is what I want to use.        
         //public iName Name { get; set; }
         //public iAddress Address { get; set; }        

@@ -28,6 +28,7 @@ namespace JobApplication
 
             ReloadJobLeadGrid();
             ReloadAgencyBrokerGrid();
+            ReloadAgencyContactGrid();
 
             //Find a better way of doing this....
             rBtnJobTitle.Checked = true;
@@ -338,6 +339,8 @@ namespace JobApplication
 
             ReloadAgencyBrokerGrid();
 
+            ReloadAgencyContactGrid();
+
             ResetSearchControls();
         }
 
@@ -384,11 +387,21 @@ namespace JobApplication
             
         }
 
+        private void ReloadAgencyContactGrid()
+        {
+            JobLeadRepo thisJobLeadRepo = new JobLeadRepo();            
+            dataGridAgencyContacts.DataSource = thisJobLeadRepo.GetAgencyContactsDatasource();
+            dataGridAgencyContacts.Columns["ContactID"].Visible = false;
+
+        }
+
         private void btnNewBroker_Click(object sender, EventArgs e)
         {
             //We will default to showing an Agency broker for new brokers.
             frmBroker newBrokerForm = new frmBroker(true);
             newBrokerForm.ShowDialog();
+
+            ReloadAgencyBrokerGrid();
         }
 
         private void btnSearchJobLeads_Click(object sender, EventArgs e)
@@ -539,7 +552,7 @@ namespace JobApplication
             frmBroker newBrokerForm = new frmBroker(brokerSelected);
             newBrokerForm.ShowDialog();
 
-            //Now reinitialise the Job Lead Grid
+            //Now reinitialise the Agency Broker Grid
             ReloadAgencyBrokerGrid();
         }
 
@@ -552,6 +565,23 @@ namespace JobApplication
 
         }
 
+        private void dataGridAgencyContacts_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
 
+            //A row has been double clicked. We need to get the BrokerID value, extract the Broker instance
+            //and then pass this to the form to display the Broker.
+            int contactIDSelected = Convert.ToInt32(dataGridAgencyContacts.SelectedRows[0].Cells["ContactID"].Value.ToString());
+
+            //PUT THIS IN A Using BLOCK?
+            JobLeadRepo thisJobLeadRepo = new JobLeadRepo();
+            iContact contactSelected = thisJobLeadRepo.GetContact(contactIDSelected);
+
+            frmContact newContactForm = new frmContact(contactSelected);
+            newContactForm.ShowDialog();
+
+            //Now reinitialise the Contacts Grid
+            ReloadAgencyContactGrid();
+
+        }
     }
 }

@@ -64,6 +64,19 @@ namespace JobApplication
             }
         }
 
+        public object GetAgencyContactsDatasource()
+        {
+            using (var ctx = new JobLeadContext())
+            {                
+
+                var allAgencyContactsTable = from m in ctx.Contacts
+                                             orderby m.Name.Surname ascending
+                                             select new { m.ContactID, Broker = m.Broker.Name, Name = m.Name.FirstName + " " + m.Name.Surname, m.LandLineTelNo, m.MobileTelNo, m.ContactNotes.Count };
+
+                return allAgencyContactsTable.ToList();
+            }
+        }
+
         #region Job Lead Grid Search Function
 
         public object GetJobRefFilteredJobLeadGridDatsSource(string jobRefToSearchFor)
