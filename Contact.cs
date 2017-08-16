@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
 
 namespace JobApplication
 {
@@ -38,7 +39,9 @@ namespace JobApplication
             set
             {
                 //Do a minor validation to check the value has one, and only one, @ char
-                if (value.Count(x => x == '@') == 1)
+                //if (value.Count(x => x == '@') == 1)
+                //Pass Email validation to a private function (perhaps better being moved to a common library)
+                if(ValidateEmail(value))
                 {
                     eMail = value;
                 }
@@ -89,6 +92,15 @@ namespace JobApplication
         {
             JobLeadRepo thisJobLeadRepo = new JobLeadRepo();
             return thisJobLeadRepo.SaveContact(this);
+        }
+
+        private bool ValidateEmail(string myEmailAddress)
+        {
+            //Validate the email structure using a "Regular Expression"
+            Regex reg = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = reg.Match(myEmailAddress);
+
+            return match.Success;
         }
     }
     

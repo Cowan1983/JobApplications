@@ -71,7 +71,7 @@ namespace JobApplication
 
                 var allAgencyContactsTable = from m in ctx.Contacts
                                              orderby m.Name.Surname ascending
-                                             select new { m.ContactID, Broker = m.Broker.Name, Name = m.Name.FirstName + " " + m.Name.Surname, m.LandLineTelNo, m.MobileTelNo, m.ContactNotes.Count };
+                                             select new { m.ContactID, Agency = m.Broker.Name, Name = m.Name.FirstName + " " + m.Name.Surname, m.LandLineTelNo, m.MobileTelNo, m.ContactNotes.Count };
 
                 return allAgencyContactsTable.ToList();
             }
